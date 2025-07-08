@@ -10,7 +10,7 @@ Created by **Hackers Colony** for awareness and educational use.
 ```bash
 pkg install git python -y
 git clone https://github.com/Hackerscolonyofficial/HCO-instaReportBot.git
-cd HCO-InstaReportBot
+cd HCO-instaReportBot
 python insta_report.py
 ```
 
