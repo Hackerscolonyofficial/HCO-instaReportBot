@@ -1,32 +1,53 @@
-#!/data/data/com.termux/files/usr/bin/bash
+import os
+import time
 
-# 🤖 HCO InstaReportBot Installer Script (Termux)
+def show_banner():
+    os.system('clear')
+    print("\033[91m" + "=" * 60)
+    print("\033[92m" + "🔥 HCO INSTA BAN 🔥".center(60))
+    print("\033[94m" + "Report Fake Instagram Accounts Easily".center(60))
+    print("\033[91m" + "=" * 60 + "\033[0m")
+    time.sleep(1)
 
-echo -e "\e[91m
-  _    _  _____   ____       ____                      _   _       _   
- | |  | ||_   _| |  _ \     |  _ \ ___  ___ ___   ___ | |_| |_   _| |_ 
- | |  | |  | |   | |_) |____| |_) / _ \/ __/ __| / _ \| __| | | | | __|
- | |__| |  | |   |  _ <_____|  _ <  __/\__ \__ \| (_) | |_| | |_| | |_ 
-  \____/   |_|   |_| \_\    |_| \_\___||___/___(_)___/ \__|_|\__,_|\__|
-                                                                      
-\e[0m"
+def show_disclaimer():
+    print("\n\033[93m⚠️  This tool is not fully free.\033[0m")
+    print("\033[92mTo unlock free access, support us by visiting our YouTube channel.\033[0m")
+    print("\033[96m👉 LIKE 👍 | SUBSCRIBE 🔔 | Click the BELL icon\033[0m")
+    input("\n\033[94mPress ENTER to continue and open YouTube...\033[0m")
 
-echo -e "\e[93m[+] Installing HCO-InstaReportBot...\e[0m"
+    os.system("termux-open-url 'https://www.youtube.com/@HackersColonyTech'")
 
-# Create working directory
-mkdir -p $HOME/HCO-InstaReport
-cd $HOME/HCO-InstaReport
+    input("\n\033[92mAfter subscribing, press ENTER to start using the tool...\033[0m")
+    os.system("clear")
 
-# Check if obfuscated insta_report.py is in Downloads
-if [ -f /sdcard/Download/insta_report.py ]; then
-    cp /sdcard/Download/insta_report.py .
-    echo -e "\e[92m[✓] Obfuscated script copied successfully.\e[0m"
-else
-    echo -e "\e[91m[!] Error: insta_report.py not found in /sdcard/Download\e[0m"
-    echo -e "\e[94mPlease download it and place it in your Downloads folder first.\e[0m"
-    exit 1
-fi
+def report_fake_account():
+    show_banner()
+    show_disclaimer()
 
-# Run the bot
-echo -e "\e[96m[>] Launching the bot...\e[0m"
-python insta_report.py
+    print("\033[92m=== Start Reporting ===\033[0m")
+    username = input("\033[92mEnter the fake Instagram username (without @): \033[0m")
+    reason = input("\033[92mReason for reporting (e.g., impersonation, scam): \033[0m")
+    victim_profile = input("\033[92mLink to the real/victim's account (if any): \033[0m")
+
+    print("\n\033[91mPreparing report...\033[0m")
+    time.sleep(1)
+
+    print(f"""
+\033[93m📄 Report Summary
+--------------------------
+🔸 Fake Username: @{username}
+🔸 Reason: {reason}
+🔸 Victim Profile: {victim_profile if victim_profile else 'N/A'}
+🔸 Report Link: https://www.instagram.com/{username}/
+\033[0m
+    """)
+
+    open_browser = input("\033[92mOpen Instagram report page now? (y/n): \033[0m").lower()
+    if open_browser == 'y':
+        os.system(f"termux-open-url 'https://www.instagram.com/{username}/'")
+        print("\033[91mRedirecting to Instagram...\033[0m")
+    else:
+        print("\033[91mOkay. Report it manually later.\033[0m")
+
+if __name__ == "__main__":
+    report_fake_account()
